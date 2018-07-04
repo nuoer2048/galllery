@@ -88,5 +88,28 @@ html,body{
     z-index: 101;
     width: 100%;
     text-align: center;
+    @at-root {
+        .controller-unit{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #a7a0a2;
+            border-radius: 50%;
+            transform: scale(.5);
+            transition: transform .6s ease-in-out,background-color .3s;
+            &.is-center{
+                transform: scale(1);
+                background-color: #888888;
+
+            }
+            &.is-inverse{
+                background-color: #555 ;
+                transform: rotateY(180deg);
+            }
+        }
+    }
 }
 /* controller -- end*/

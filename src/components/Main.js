@@ -88,8 +88,35 @@ e.preventDefault();
     }
 });
 //控制组件
+var ControllerUnit = React.createClass({
+    handleClick:function (e) {
 
+           if(this.props.arrange.isCenter)
+           {
+               this.props.inverse();
+           }else {
+               this.props.center();
+           }
+        e.preventDefault();
+        e.stopPropagation();
+    },
+    render:function () {
+        var controllerUnitClassName = 'controller-unit';
+        if(this.props.arrange.isCenter)
+        {
+            controllerUnitClassName+=' is-center';
+            if(this.props.arrange.isInverse)
+            {
+                controllerUnitClassName+=' is-inverse';
+            }
+        }
+        return (
+            <span className={controllerUnitClassName} onClick={this.handleClick}></span>
+        );
+    }
+});
 
+//的舞台
 var AppComponent = React.createClass({
     Constant: {
         centerPos: {
@@ -286,7 +313,8 @@ this.rearrange(index);
 
             imgFigures.push(<ImgFigure key={index}  data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]}
                                    inverse = {this.inverse(index)} center = {this.center(index)} />);
-
+//控制组件
+             controllerUnits.push(<ControllerUnit  key={index} arrange ={this.state.imgsArrangeArr[index]} inverse = {this.inverse(index)} center = {this.center(index)}/>)
         }.bind(this));
 
         return (
@@ -302,6 +330,7 @@ this.rearrange(index);
         );
     }
 });
+
 
 AppComponent.defaultProps = {
 };
